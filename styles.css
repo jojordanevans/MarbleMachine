@@ -34,20 +34,57 @@ p {
 
 .marble-frame {
   margin-inline: auto;
-  width: min(68vw, 340px);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
+  width: min(88vw, 560px);
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255, 255, 255, 0.08), transparent 45%),
+    linear-gradient(165deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
   box-shadow: 0 18px 30px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
 }
 
+.track {
+  position: absolute;
+  inset: 0;
+}
+
+.ramp,
+.ramp-edge {
+  position: absolute;
+  left: 12%;
+  width: 74%;
+  transform: rotate(14deg);
+  transform-origin: left center;
+  border-radius: 999px;
+}
+
+.ramp {
+  top: 34%;
+  height: 28px;
+  background: linear-gradient(180deg, #d8e0ef 0%, #a4b3ca 48%, #7388a9 100%);
+  box-shadow:
+    0 10px 18px rgba(0, 0, 0, 0.33),
+    inset 0 2px 2px rgba(255, 255, 255, 0.6);
+}
+
+.ramp-edge {
+  top: calc(34% + 26px);
+  height: 8px;
+  background: linear-gradient(180deg, #607696 0%, #4e627e 100%);
+  opacity: 0.9;
+}
+
 .marble {
-  width: min(56vw, 230px);
+  --size: clamp(28px, 6vw, 44px);
+  width: var(--size);
   aspect-ratio: 1;
   border-radius: 50%;
+  position: absolute;
+  left: 11%;
+  top: calc(34% - var(--size) / 2 + 5px);
   background:
     radial-gradient(circle at 28% 25%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.15) 18%, transparent 38%),
     radial-gradient(circle at 34% 35%, rgba(170, 235, 255, 0.5), transparent 55%),
@@ -55,10 +92,10 @@ p {
     radial-gradient(circle at 48% 52%, #4ac7ff 0%, #2f8cd7 38%, #1a5ea5 62%, #11427d 82%, #0a2850 100%);
   border: 1px solid rgba(207, 238, 255, 0.45);
   box-shadow:
-    inset -18px -24px 36px rgba(3, 17, 46, 0.45),
-    inset 15px 18px 28px rgba(171, 235, 255, 0.28),
-    0 20px 30px rgba(0, 0, 0, 0.35);
-  position: relative;
+    inset -8px -10px 16px rgba(3, 17, 46, 0.45),
+    inset 6px 8px 12px rgba(171, 235, 255, 0.28),
+    0 8px 12px rgba(0, 0, 0, 0.35);
+  animation: marble-motion 4s ease-in infinite, marble-spin 0.6s linear infinite;
 }
 
 .marble::before {
@@ -80,4 +117,28 @@ p {
   left: 18%;
   background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.18) 60%, transparent 72%);
   filter: blur(0.4px);
+}
+
+@keyframes marble-motion {
+  0% {
+    left: 11%;
+    top: calc(34% - var(--size) / 2 + 5px);
+  }
+  80% {
+    left: 77%;
+    top: calc(52% - var(--size) / 2 + 5px);
+  }
+  100% {
+    left: 77%;
+    top: calc(52% - var(--size) / 2 + 5px);
+  }
+}
+
+@keyframes marble-spin {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
 }
