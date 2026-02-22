@@ -9,9 +9,13 @@
   <body>
     <main class="stage">
       <h1>Marble Machine</h1>
-      <p>First pass: a single marble illustration.</p>
+      <p>Watch the marble roll down a rectangular ramp from left to right.</p>
 
-      <section class="marble-frame" aria-label="Rendered marble">
+      <section class="marble-frame" aria-label="Animated marble machine">
+        <div class="track" aria-hidden="true">
+          <div class="ramp"></div>
+          <div class="ramp-edge"></div>
+        </div>
         <div class="marble" role="img" aria-label="Blue glass marble"></div>
       </section>
     </main>
